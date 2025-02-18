@@ -1,5 +1,6 @@
 const js = require('@eslint/js');
 const prettier = require('eslint-config-prettier');
+const globals = require('globals');
 const eslintPluginPrettier = require('eslint-plugin-prettier');
 
 module.exports = [
