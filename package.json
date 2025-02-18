@@ -25,9 +25,12 @@
     "url": "https://github.com/PomPerWoW/papdaew-shared/issues"
   },
   "homepage": "https://github.com/PomPerWoW/papdaew-shared#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
     "http-status-codes": "^2.3.0",
-    "husky": "^9.1.7",
     "pino": "^9.6.0",
     "pino-pretty": "^13.0.0",
     "uuid": "^11.0.5"
@@ -37,9 +40,9 @@
     "auto-changelog": "^2.5.0",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
-    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^15.15.0",
+    "husky": "^9.1.7",
     "prettier": "^3.5.1"
   }
 }
