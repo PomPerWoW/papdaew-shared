@@ -1,0 +1,39 @@
+# Tests
+__tests__
+*.test.js
+coverage
+
+# Development files
+.github
+.husky
+.eslintrc.js
+.prettierrc
+jest.config.js
+*.config.js
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+docs
+*.md
+!README.md
+
+# IDE files
+.idea
+.vscode
+*.sublime-*
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules
+
+# Environment variables
+.env
+.env.*
