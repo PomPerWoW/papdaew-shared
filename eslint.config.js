@@ -8,6 +8,7 @@ module.exports = [
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.jest,
         process: 'readonly',
       },
       ecmaVersion: 2022,

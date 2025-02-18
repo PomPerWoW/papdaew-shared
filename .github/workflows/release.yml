@@ -27,6 +27,9 @@ jobs:
       - name: Lint
         run: npm run lint:check
 
+      - name: Run tests
+        run: npm run test
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
