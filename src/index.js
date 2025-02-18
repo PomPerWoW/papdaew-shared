@@ -1,6 +1,11 @@
+const logger = require('./logger');
+const errors = require('./errors');
+const middleware = require('./middleware');
+const utils = require('./utils');
+
 module.exports = {
-  ...require('./logger'),
-  ...require('./errors'),
-  ...require('./middleware'),
-  ...require('./utils'),
+  logger,
+  errors,
+  middleware,
+  utils,
 };
