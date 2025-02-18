@@ -1,5 +1,5 @@
 {
-  "name": "papdaew-shared",
+  "name": "@papdaew/shared",
   "version": "0.1.0",
   "description": "Shared utilities for Papdaew microservices",
   "type": "commonjs",
