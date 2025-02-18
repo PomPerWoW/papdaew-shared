@@ -1,0 +1,48 @@
+{
+  "name": "@papdaew/shared",
+  "version": "0.1.0",
+  "description": "Shared utilities for Papdaew microservices",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "lint:check": "eslint 'src/**/*.js'",
+    "lint:fix": "eslint 'src/**/*.js' --fix",
+    "format:check": "prettier --check 'src/**/*.{js,json}'",
+    "format:fix": "prettier --write 'src/**/*.{js,json}'",
+    "changelog": "auto-changelog -p",
+    "release:major": "npm version major -m 'chore(release): bump version to %s' && npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): update for major release' && git push --follow-tags",
+    "release:minor": "npm version minor -m 'chore(release): bump version to %s' && npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): update for minor release' && git push --follow-tags",
+    "release:patch": "npm version patch -m 'chore(release): bump version to %s' && npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): update for patch release' && git push --follow-tags",
+    "prepare": "husky"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PomPerWoW/papdaew-shared.git"
+  },
+  "author": "Papdaew",
+  "bugs": {
+    "url": "https://github.com/PomPerWoW/papdaew-shared/issues"
+  },
+  "homepage": "https://github.com/PomPerWoW/papdaew-shared#readme",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "http-status-codes": "^2.3.0",
+    "pino": "^9.6.0",
+    "pino-pretty": "^13.0.0",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "auto-changelog": "^2.5.0",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^15.15.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.1"
+  }
+}
