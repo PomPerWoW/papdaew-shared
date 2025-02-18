@@ -11,9 +11,9 @@
     "format:check": "prettier --check 'src/**/*.{js,json}'",
     "format:fix": "prettier --write 'src/**/*.{js,json}'",
     "changelog": "auto-changelog -p",
-    "release:major": "npm version major && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog for major release' && git push --follow-tags",
-    "release:minor": "npm version minor && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog for minor release' && git push --follow-tags",
-    "release:patch": "npm version patch && npm run changelog && git add CHANGELOG.md && git commit -m 'docs: update changelog for patch release' && git push --follow-tags",
+    "release:major": "npm version major -m 'chore(release): bump version to %s' && npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): update for major release' && git push --follow-tags",
+    "release:minor": "npm version minor -m 'chore(release): bump version to %s' && npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): update for minor release' && git push --follow-tags",
+    "release:patch": "npm version patch -m 'chore(release): bump version to %s' && npm run changelog && git add CHANGELOG.md && git commit -m 'docs(changelog): update for patch release' && git push --follow-tags",
     "prepare": "husky"
   },
   "repository": {
