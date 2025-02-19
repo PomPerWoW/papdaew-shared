@@ -1,11 +1,16 @@
-const logger = require('./logger');
-const errors = require('./errors');
-const middleware = require('./middleware');
-const utils = require('./utils');
+const Logger = require('./logger/logger');
+const errors = require('./errors/errors');
+const requestId = require('./middleware/requestId');
+const asyncHandler = require('./utils/asyncHandler');
 
 module.exports = {
-  logger,
+  Logger,
+  ...errors,
+  middleware: {
+    requestId,
+  },
+  utils: {
+    asyncHandler,
+  },
   errors,
-  middleware,
-  utils,
 };

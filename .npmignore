@@ -1,4 +1,5 @@
 # Tests
+tests/
 __tests__
 *.test.js
 coverage
