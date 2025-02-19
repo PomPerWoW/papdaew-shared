@@ -1,5 +1,4 @@
-const requestId = require('./requestId');
+const { requestId } = require('./requestId');
+const { globalErrorHandler } = require('./errors');
 
-module.exports = {
-  requestId,
-};
+module.exports = { requestId, globalErrorHandler };

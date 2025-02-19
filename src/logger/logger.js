@@ -1,6 +1,6 @@
 const pino = require('pino');
 
-class Logger {
+class PinoLogger {
   constructor(options = {}) {
     const {
       name = 'app',
@@ -75,4 +75,4 @@ class Logger {
   }
 }
 
-module.exports = Logger;
+module.exports = { PinoLogger };

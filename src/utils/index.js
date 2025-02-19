@@ -1,5 +1,3 @@
-const asyncHandler = require('./asyncHandler');
+const { asyncHandler } = require('./asyncHandler');
 
-module.exports = {
-  asyncHandler,
-};
+module.exports = { asyncHandler };
