@@ -1,2 +1,3 @@
-const Logger = require('./logger');
-module.exports = Logger;
+const { PinoLogger } = require('./logger');
+
+module.exports = { PinoLogger };
