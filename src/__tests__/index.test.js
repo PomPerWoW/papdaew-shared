@@ -2,33 +2,6 @@ const sharedModule = require('../index');
 const { StatusCodes } = require('http-status-codes');
 
 describe('Shared Module Exports', () => {
-  test('should export all required modules', () => {
-    expect(sharedModule).toHaveProperty('Logger');
-    expect(sharedModule).toHaveProperty('errors');
-    expect(sharedModule).toHaveProperty('middleware');
-    expect(sharedModule).toHaveProperty('utils');
-  });
-
-  test('should export middleware with requestId', () => {
-    expect(sharedModule.middleware).toHaveProperty('requestId');
-    expect(typeof sharedModule.middleware.requestId).toBe('function');
-  });
-
-  test('should export utils with asyncHandler', () => {
-    expect(sharedModule.utils).toHaveProperty('asyncHandler');
-    expect(typeof sharedModule.utils.asyncHandler).toBe('function');
-  });
-
-  test('should export logger as a function/class', () => {
-    expect(sharedModule.Logger).toBeDefined();
-    expect(typeof sharedModule.Logger).toBe('function');
-  });
-
-  test('should export errors object', () => {
-    expect(sharedModule.errors).toBeDefined();
-    expect(typeof sharedModule.errors).toBe('object');
-  });
-
   describe('Error Classes', () => {
     test('should export NotFoundError', () => {
       const error = new sharedModule.NotFoundError('Test not found');
@@ -41,6 +14,73 @@ describe('Shared Module Exports', () => {
 
     test('should export globalErrorHandler function', () => {
       expect(typeof sharedModule.globalErrorHandler).toBe('function');
+    });
+  });
+
+  describe('Logger', () => {
+    test('should export PinoLogger class', () => {
+      expect(sharedModule.PinoLogger).toBeDefined();
+      const logger = new sharedModule.PinoLogger({ name: 'test' });
+      expect(logger).toBeInstanceOf(sharedModule.PinoLogger);
+      expect(typeof logger.info).toBe('function');
+      expect(typeof logger.error).toBe('function');
+      expect(typeof logger.warn).toBe('function');
+      expect(typeof logger.debug).toBe('function');
+    });
+  });
+
+  describe('Middleware', () => {
+    test('should export requestId middleware', () => {
+      expect(typeof sharedModule.requestId).toBe('function');
+    });
+
+    test('requestId middleware should set request ID', () => {
+      const req = { headers: {} };
+      const res = { setHeader: jest.fn() };
+      const next = jest.fn();
+
+      sharedModule.requestId(req, res, next);
+
+      expect(req.id).toBeDefined();
+      expect(res.setHeader).toHaveBeenCalledWith('x-request-id', req.id);
+      expect(next).toHaveBeenCalled();
+    });
+  });
+
+  describe('Utils', () => {
+    test('should export asyncHandler utility', () => {
+      expect(typeof sharedModule.asyncHandler).toBe('function');
+    });
+
+    test('asyncHandler should wrap async function', async () => {
+      const mockHandler = jest.fn().mockResolvedValue('success');
+      const wrappedHandler = sharedModule.asyncHandler(mockHandler);
+
+      expect(typeof wrappedHandler).toBe('function');
+
+      const req = {};
+      const res = {};
+      const next = jest.fn();
+
+      await wrappedHandler(req, res, next);
+
+      expect(mockHandler).toHaveBeenCalledWith(req, res, next);
+      expect(next).not.toHaveBeenCalled();
+    });
+
+    test('asyncHandler should catch errors and pass to next', async () => {
+      const error = new Error('Test error');
+      const mockHandler = jest.fn().mockRejectedValue(error);
+      const wrappedHandler = sharedModule.asyncHandler(mockHandler);
+
+      const req = {};
+      const res = {};
+      const next = jest.fn();
+
+      await wrappedHandler(req, res, next);
+
+      expect(mockHandler).toHaveBeenCalledWith(req, res, next);
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
