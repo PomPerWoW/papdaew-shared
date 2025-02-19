@@ -59,7 +59,7 @@ class PinoLogger {
   error(message, error = null) {
     this.logger.error(
       {
-        err: error,
+        err: error || message,
         stack: error?.stack,
       },
       message
