@@ -3,17 +3,12 @@ const pino = require('pino');
 class PinoLogger {
   static #instance;
 
-  constructor(options = {}) {
+  constructor(options) {
     if (PinoLogger.#instance) {
       return PinoLogger.#instance;
     }
 
-    const {
-      name = 'app',
-      level = process.env.LOG_LEVEL || 'info',
-      serviceVersion = process.env.SERVICE_VERSION || '1.0.0',
-      environment = process.env.NODE_ENV || 'development',
-    } = options;
+    const { name, level, serviceVersion, environment } = options;
 
     if (environment === 'test') {
       this.logger = this.#createTestLogger();
