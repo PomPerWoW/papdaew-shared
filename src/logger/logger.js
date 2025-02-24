@@ -17,7 +17,7 @@ class PinoLogger {
 
     this.logger = pino({
       name,
-      level,
+      level: level || 'info',
       base: {
         env: environment,
         version: serviceVersion,
