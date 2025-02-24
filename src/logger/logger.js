@@ -1,7 +1,13 @@
 const pino = require('pino');
 
 class PinoLogger {
+  static #instance;
+
   constructor(options = {}) {
+    if (PinoLogger.#instance) {
+      return PinoLogger.#instance;
+    }
+
     const {
       name = 'app',
       level = process.env.LOG_LEVEL || 'info',
@@ -36,6 +42,8 @@ class PinoLogger {
       timestamp: () => `,"timestamp":"${new Date().toISOString()}"`,
       redact: ['password', 'token', 'authorization', 'cookie'],
     });
+
+    PinoLogger.#instance = this;
   }
 
   #createTestLogger() {
