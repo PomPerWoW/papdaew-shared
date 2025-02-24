@@ -1,6 +1,6 @@
 {
   "name": "@papdaew/shared",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Shared utilities for Papdaew microservices",
   "type": "commonjs",
   "main": "src/index.js",
