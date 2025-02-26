@@ -59,7 +59,21 @@ class PinoLogger {
     this.logger.info(data, message);
   }
 
-  error(message, error = null) {
+  error(messageOrError, errorOrMessage = null) {
+    let message;
+    let error;
+
+    if (typeof messageOrError === 'string') {
+      message = messageOrError;
+      error = errorOrMessage;
+    } else {
+      error = messageOrError;
+      message =
+        typeof errorOrMessage === 'string'
+          ? errorOrMessage
+          : 'An error occurred';
+    }
+
     const errorData = {};
 
     if (error) {
@@ -79,7 +93,7 @@ class PinoLogger {
         errorData.err = { message: String(error) };
       }
     } else {
-      errorData.err = { message };
+      errorData.err = { message: 'Unknown error' };
     }
 
     this.logger.error(errorData, message);
