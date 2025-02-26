@@ -3,7 +3,7 @@ const pino = require('pino');
 class PinoLogger {
   static #instance;
 
-  constructor(options) {
+  constructor(options = {}) {
     if (PinoLogger.#instance) {
       return PinoLogger.#instance;
     }
@@ -60,13 +60,29 @@ class PinoLogger {
   }
 
   error(message, error = null) {
-    this.logger.error(
-      {
-        err: error ? error : message,
-        stack: error?.stack,
-      },
-      message
-    );
+    const errorData = {};
+
+    if (error) {
+      if (error instanceof Error) {
+        errorData.err = {
+          name: error.name,
+          message: error.message,
+          stack: error.stack,
+        };
+      } else if (typeof error === 'object') {
+        errorData.err = error;
+
+        if (error.stack) {
+          errorData.stack = error.stack;
+        }
+      } else {
+        errorData.err = { message: String(error) };
+      }
+    } else {
+      errorData.err = { message };
+    }
+
+    this.logger.error(errorData, message);
   }
 
   warn(message, data = {}) {
