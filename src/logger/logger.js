@@ -59,30 +59,16 @@ class PinoLogger {
     this.logger.info(data, message);
   }
 
-  error(message, error = null) {
-    const errorData = {};
-
-    if (error) {
-      if (error instanceof Error) {
-        errorData.err = {
-          name: error.name,
-          message: error.message,
-          stack: error.stack,
-        };
-      } else if (typeof error === 'object') {
-        errorData.err = error;
-
-        if (error.stack) {
-          errorData.stack = error.stack;
-        }
-      } else {
-        errorData.err = { message: String(error) };
-      }
+  error(error, message = 'An error occurred') {
+    if (error instanceof Error) {
+      this.logger.error({ err: error }, message);
+    } else if (typeof error === 'object') {
+      this.logger.error(error, message);
+    } else if (typeof error === 'string' && !message) {
+      this.logger.error(message);
     } else {
-      errorData.err = { message };
+      this.logger.error({ err: { value: error } }, message);
     }
-
-    this.logger.error(errorData, message);
   }
 
   warn(message, data = {}) {
